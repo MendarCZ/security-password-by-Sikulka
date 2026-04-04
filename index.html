@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bezpečnost za 2 minuty</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="lang-switch" aria-label="Přepínač jazyka">
+      <button type="button" class="lang-btn active" type="button" data-lang="cs">CZ</button>
+      <button type="button" class="lang-btn" type="button" data-lang="en">EN</button>
+    </div>
+
+    <h1 data-i18n="hero_title">🔐 Bezpečnost za 2 minuty</h1>
+    <div class="mascot-wrap">
+      <div class="mascot-card">
+        <div class="mascot-stage">
+          <div id="sikulka" class="mascot-box" data-expression="smile" aria-label="Mrkající Šikulka" role="img">
+            <img class="avatar-layer" id="layer-neck" src="avatar/krk.png" alt="">
+            <img class="avatar-layer" id="layer-clothes" src="avatar/obleceni.png" alt="">
+            <img class="avatar-layer" id="layer-head" src="avatar/hlava.png" alt="">
+            <img class="avatar-layer" id="layer-hair" src="avatar/vlasy.png" alt="">
+            <img class="avatar-layer" id="eyes" src="avatar/oci_open.png" alt="">
+            <img class="avatar-layer" id="eyebrows" src="avatar/oboci_neutral.png" alt="">
+            <img class="avatar-layer" id="mouth" src="avatar/pusa.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="subtitle" data-i18n="hero_subtitle">
+      Neřeš blbosti. Udělej pár základních věcí a budeš bezpečnější než většina lidí.
+    </p>
+    <p class="note" data-i18n="hero_note">
+      Telefon tě chrání před ostatními. Záloha tě chrání před tebou.
+    </p>
+
+    <div class="top-actions">
+      <button type="button" class="top-btn" onclick="expandAll()" data-i18n="show_all">Zobrazit vše</button>
+      <button type="button" type="button" class="top-btn" onclick="collapseAll()" data-i18n="hide_all">Skrýt vše</button>
+      <button type="button" type="button" class="top-btn danger" onclick="resetChecks()" data-i18n="reset">Reset</button>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-text">
+        <span id="progress-label" data-i18n="progress_label">Máš hotovo</span>
+        <span id="progress-count">0</span>
+        /
+        <span id="progress-total">0</span>
+        <span id="progress-suffix" data-i18n="progress_suffix">kroků</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="completion-banner" class="completion-banner" hidden data-i18n="completion_message">
+      🎉 Hotovo. Teď jsi bezpečnější než většina lidí.
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="google">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2><img src="https://www.google.com/favicon.ico" class="icon" alt="">Google</h2>
+      </div>
+      <p class="intro" data-i18n="google_intro">Gmail, YouTube a často i přístup k dalším účtům. Kdo má tvůj Google, může mít skoro všechno.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <a class="action" href="https://myaccount.google.com/security" target="_blank" rel="noopener" data-i18n="google_action">Otevřít Google zabezpečení</a>
+        <ol>
+          <li data-i18n-html="google_step_1">Najdi <strong>Dvoufázové ověření</strong>.</li>
+          <li data-i18n-html="google_step_2">Klikni na <strong>Zapnout</strong>.</li>
+          <li data-i18n="google_step_3">Nastav potvrzení přes telefon.</li>
+        </ol>
+        <p class="bonus" data-i18n-html="google_bonus"><strong>Bonus:</strong> Ulož si záložní kódy. Když rozbiješ telefon, nezůstaneš venku.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="meta">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2><img src="https://www.facebook.com/favicon.ico" class="icon" alt="">Facebook / Instagram</h2>
+      </div>
+      <p class="intro" data-i18n="meta_intro">Meta účty lidi často podceňují. Přitom se přes ně dají dělat podvody, zprávy i převzetí profilu.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <a class="action" href="https://accountscenter.facebook.com/password_and_security" target="_blank" rel="noopener" data-i18n="meta_action">Otevřít Meta zabezpečení</a>
+        <ol>
+          <li data-i18n-html="meta_step_1">Najdi <strong>Dvoufázové ověření</strong>.</li>
+          <li data-i18n="meta_step_2">Zapni ochranu přes telefon nebo aplikaci.</li>
+        </ol>
+        <p class="bonus" data-i18n-html="meta_bonus"><strong>Bonus:</strong> Ulož si recovery kódy.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="chatgpt">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2><img src="https://chatgpt.com/favicon.ico" class="icon" alt="">ChatGPT / OpenAI</h2>
+      </div>
+      <p class="intro" data-i18n="chatgpt_intro">Konverzace, nápady, projekty a práce. Tohle už dávno není jen hračka.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <a class="action" href="https://chatgpt.com/#settings/Security" target="_blank" rel="noopener" data-i18n="chatgpt_action">Otevřít ChatGPT zabezpečení</a>
+        <ol>
+          <li data-i18n-html="chatgpt_step_1">Najdi <strong>Two-Factor Authentication</strong>.</li>
+          <li data-i18n-html="chatgpt_step_2">Klikni na <strong>Enable</strong>.</li>
+        </ol>
+        <p class="bonus" data-i18n-html="chatgpt_bonus"><strong>Bonus:</strong> Ulož si backup kódy.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="apple">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2><img src="https://www.apple.com/favicon.ico" class="icon" alt="">Apple</h2>
+      </div>
+      <p class="intro" data-i18n="apple_intro">Apple účet znamená iCloud, zařízení, fotky a další věci, o které nechceš přijít.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <a class="action" href="https://appleid.apple.com/account/manage" target="_blank" rel="noopener" data-i18n="apple_action">Otevřít Apple účet</a>
+        <ol>
+          <li data-i18n="apple_step_1">Přihlas se.</li>
+          <li data-i18n-html="apple_step_2">Najdi <strong>Security</strong>.</li>
+          <li data-i18n-html="apple_step_3">Zapni <strong>Two-Factor Authentication</strong>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="email">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2 data-i18n="email_title">📧 Email</h2>
+      </div>
+      <p class="intro" data-i18n="email_intro">Email je základ všeho. Kdo má email, může resetovat hesla skoro kamkoliv.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <ol>
+          <li data-i18n="email_step_1">Přihlas se do svého emailu.</li>
+          <li data-i18n-html="email_step_2">Najdi <strong>Zabezpečení / Security</strong>.</li>
+          <li data-i18n-html="email_step_3">Zapni <strong>2FA</strong>.</li>
+        </ol>
+        <p class="bonus" data-i18n-html="email_bonus"><strong>Bonus:</strong> Pokud to služba umožní, ulož si recovery kódy.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="bank">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2 data-i18n="bank_title">🏦 Banka</h2>
+      </div>
+      <p class="intro" data-i18n="bank_intro">Tady není potřeba kouzlit. Většinou stačí mít zapnuté to, co už banka nabízí.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <ol>
+          <li data-i18n="bank_step_1">Zkontroluj potvrzení přes mobil.</li>
+          <li data-i18n="bank_step_2">Nastav limity na kartě.</li>
+          <li data-i18n="bank_step_3">Vypni internetové platby, když je nepotřebuješ.</li>
+        </ol>
+        <p class="bonus" data-i18n-html="bank_bonus"><strong>Realita:</strong> Není to 100 %, ale za minimum práce dostaneš hodně silnou ochranu.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="windows">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2>🪟 Windows</h2>
+      </div>
+      <p class="intro" data-i18n="windows_intro">Když někdo sedí přímo u tvého počítače, je pozdě řešit, proč tam není PIN nebo heslo.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <ol>
+          <li data-i18n-html="windows_step_1">Stiskni <strong>Win + R</strong>.</li>
+          <li data-i18n-html="windows_step_2">Vlož <code>ms-settings:signinoptions</code></li>
+          <li data-i18n="windows_step_3">Nastav PIN nebo heslo.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-top">
+        <label class="checkline">
+          <input type="checkbox" data-check="passwords">
+          <span data-i18n="done">Hotovo</span>
+        </label>
+        <h2 data-i18n="passwords_title">🔑 Hesla</h2>
+      </div>
+      <p class="intro" data-i18n="passwords_intro">Největší klasika internetu: stejné heslo všude a pak překvapení, že je průser.</p>
+      <button onclick="toggle(this)" data-i18n="show_steps">Zobrazit kroky</button>
+      <div class="content">
+        <ol>
+          <li data-i18n="passwords_step_1">Nepoužívej stejné heslo všude.</li>
+          <li data-i18n-html="passwords_step_2">Nepoužívej kraviny jako <strong>123456</strong>.</li>
+          <li data-i18n="passwords_step_3">Používej radši delší větu než krátké heslo.</li>
+        </ol>
+        <p class="bonus" data-i18n-html="passwords_bonus"><strong>Příklad:</strong> <code>PesSkacePoStrese2024!</code></p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
